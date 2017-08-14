@@ -41,7 +41,7 @@ object Dependencies {
     val config               = "1.0.2"
     val scalaUtil            = "0.1.0"
     val snowplowRawEvent     = "0.1.0"
-    val snowplowCommonEnrich = "0.24.0"
+    val snowplowCommonEnrich = "0.25.0"
     val scalazon             = "0.12-SNAPSHOT"
     val scalaz7              = "7.0.0"
     val igluClient           = "0.4.0"
@@ -71,7 +71,7 @@ object Dependencies {
     val config               = "com.typesafe"               %  "config"                   % V.config
     val scalaUtil            = "com.snowplowanalytics"      %  "scala-util"               % V.scalaUtil
     val snowplowRawEvent     = "com.snowplowanalytics"      % "snowplow-thrift-raw-event" % V.snowplowRawEvent
-    val snowplowCommonEnrich = "com.snowplowanalytics"      % "snowplow-common-enrich"    % V.snowplowCommonEnrich
+    val snowplowCommonEnrich = "com.snowplowanalytics"      %% "snowplow-common-enrich"    % V.snowplowCommonEnrich
     val scalazon             = "io.github.cloudify"         %% "scalazon"                 % V.scalazon
     val scalaz7              = "org.scalaz"                 %% "scalaz-core"              % V.scalaz7
     val igluClient           = "com.snowplowanalytics"      %% "iglu-scala-client"        % V.igluClient
