@@ -26,7 +26,8 @@ import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.{
   EnvironmentVariableCredentialsProvider,
   BasicAWSCredentials,
-  ClasspathPropertiesFileCredentialsProvider
+  ClasspathPropertiesFileCredentialsProvider,
+  DefaultAWSCredentialsProviderChain
 }
 import com.amazonaws.services.kinesis.AmazonKinesisClient
 
@@ -204,7 +205,7 @@ class KinesisSink private (config: CollectorConfig, inputType: InputType.InputTy
     val accessKey = config.awsAccessKey
     val secretKey = config.awsSecretKey
     val client = if (isDefault(accessKey) && isDefault(secretKey)) {
-      new AmazonKinesisClient(new EnvironmentVariableCredentialsProvider())
+      new AmazonKinesisClient(DefaultAWSCredentialsProviderChain.getInstance())
     } else if (isDefault(accessKey) || isDefault(secretKey)) {
       throw new RuntimeException("access-key and secret-key must both be set to 'env', or neither")
     } else if (isIam(accessKey) && isIam(secretKey)) {
@@ -212,7 +213,7 @@ class KinesisSink private (config: CollectorConfig, inputType: InputType.InputTy
     } else if (isIam(accessKey) || isIam(secretKey)) {
       throw new RuntimeException("access-key and secret-key must both be set to 'iam', or neither of them")
     } else if (isEnv(accessKey) && isEnv(secretKey)) {
-      new AmazonKinesisClient()
+      new AmazonKinesisClient(new EnvironmentVariableCredentialsProvider())
     } else if (isEnv(accessKey) || isEnv(secretKey)) {
       throw new RuntimeException("access-key and secret-key must both be set to 'env', or neither of them")
     } else {
